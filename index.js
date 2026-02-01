@@ -7,10 +7,9 @@ const clearBtn = document.querySelector("#clearBtn");
 addbtn.addEventListener("click", addTask);
 
 pending.addEventListener("click", (event) => {
-  if (event.target.tagName.toLowerCase() === "li") {
-    const task = event.target;
+  if (event.target.classList.contains("check")) {
+    const task = event.target.closest("li");
 
-    // Animate out
     task.classList.add("move-out");
 
     task.addEventListener(
@@ -18,13 +17,14 @@ pending.addEventListener("click", (event) => {
       () => {
         task.classList.remove("move-out");
 
-        // Move to completed list
+        // lock checkbox
+        event.target.checked = true;
+        event.target.disabled = true;
+
         completed.append(task);
 
-        // Animate in
         task.classList.add("move-in");
 
-        // Clean up class after animation
         task.addEventListener(
           "animationend",
           () => task.classList.remove("move-in"),
@@ -37,24 +37,33 @@ pending.addEventListener("click", (event) => {
 });
 
 
-function addTask(){
-    if(tasks.value.trim() === ""){
-        return;
-    }
-    const newTask = document.createElement("li");
-    newTask.textContent = tasks.value;
-    tasks.value = "";
-    pending.append(newTask);
+function addTask() {
+  if (tasks.value.trim() === "") return;
+
+  // creating the list item in for each task
+  const li = document.createElement("li");
+
+
+  // creating checkboxes for the task
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.classList.add("check");
+
+
+  const span = document.createElement("span");
+  span.textContent = tasks.value;
+  li.append(span, checkbox);
+
+  pending.append(li);
+  tasks.value = "";
 }
 
 clearBtn.addEventListener("click", clearCompletedTasks);
 
-function clearCompletedTasks()
-{
-    while(completed.children.length > 0)
-    {
-        completed.removeChild(completed.firstChild);
-        // or can use the 
-        // completed.innerHTML = "";
-    }
+function clearCompletedTasks() {
+  while (completed.children.length > 0) {
+    completed.removeChild(completed.firstChild);
+    // or can use the
+    // completed.innerHTML = "";
+  }
 }
