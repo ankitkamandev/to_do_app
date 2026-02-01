@@ -6,12 +6,36 @@ const clearBtn = document.querySelector("#clearBtn");
 
 addbtn.addEventListener("click", addTask);
 
-pending.addEventListener("click", (event)=>{
-    if(event.target.tagName.toLowerCase() === "li" )
-    {
-        completed.append(event.target);
-    }
+pending.addEventListener("click", (event) => {
+  if (event.target.tagName.toLowerCase() === "li") {
+    const task = event.target;
+
+    // Animate out
+    task.classList.add("move-out");
+
+    task.addEventListener(
+      "animationend",
+      () => {
+        task.classList.remove("move-out");
+
+        // Move to completed list
+        completed.append(task);
+
+        // Animate in
+        task.classList.add("move-in");
+
+        // Clean up class after animation
+        task.addEventListener(
+          "animationend",
+          () => task.classList.remove("move-in"),
+          { once: true }
+        );
+      },
+      { once: true }
+    );
+  }
 });
+
 
 function addTask(){
     if(tasks.value.trim() === ""){

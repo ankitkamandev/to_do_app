@@ -1,0 +1,157 @@
+/* ===== CSS RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont;
+}
+
+/* ===== COLOR VARIABLES ===== */
+:root {
+  --bg-black: #0b0b10;
+  --card-black: #141420;
+  --purple: #7c5cff;
+  --purple-hover: #6a4df5;
+  --text-main: #f4f4f6;
+  --text-muted: #a1a1b3;
+  --border-dark: #26263a;
+}
+
+/* ===== PAGE LAYOUT ===== */
+body {
+  background: radial-gradient(circle at top, #161625, var(--bg-black));
+  min-height: 100vh;
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem;
+}
+
+/* ===== TITLE ===== */
+h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2.4rem;
+  letter-spacing: 1px;
+  color: var(--purple);
+}
+
+/* ===== INPUT SECTION ===== */
+label {
+  margin-bottom: 0.4rem;
+  color: var(--text-muted);
+}
+
+.tasks {
+  width: 320px;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-dark);
+  background-color: var(--card-black);
+  color: var(--text-main);
+  outline: none;
+  margin-bottom: 1rem;
+}
+
+.tasks:focus {
+  border-color: var(--purple);
+}
+
+/* ===== BUTTONS ===== */
+button {
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--purple);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--purple-hover);
+  transform: translateY(-1px);
+}
+
+#clearBtn {
+  margin-top: 1rem;
+  background-color: transparent;
+  border: 1px solid var(--purple);
+  color: var(--purple);
+}
+
+#clearBtn:hover {
+  background-color: var(--purple);
+  color: white;
+}
+
+/* ===== TASK SECTIONS ===== */
+div {
+  width: 360px;
+  background-color: var(--card-black);
+  border-radius: 12px;
+  padding: 1.2rem;
+  margin-top: 1.5rem;
+  border: 1px solid var(--border-dark);
+}
+
+/* ===== SECTION HEADERS ===== */
+p {
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ===== TASK LIST ===== */
+ul {
+  list-style: none;
+}
+
+li {
+  padding: 0.65rem 0.8rem;
+  background-color: #1b1b2b;
+  border-radius: 8px;
+  margin-bottom: 0.6rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+li:hover {
+  background-color: #23233a;
+  transform: translateX(3px);
+}
+
+/* ===== COMPLETED TASKS ===== */
+.completed li {
+  text-decoration: line-through;
+  color: #8c8ca3;
+  background-color: #12121c;
+}
+
+/* ===== TASK MOVE ANIMATIONS ===== */
+@keyframes slideOut {
+  to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.move-out {
+  animation: slideOut 0.25s ease forwards;
+}
+
+.move-in {
+  animation: slideIn 0.25s ease forwards;
+}
